@@ -147,7 +147,6 @@ dff = df[
 
 # -------------------- Header --------------------
 st.title("📊 Dashboard Izin Jan–Apr")
-st.caption("Konversi dari Google Colab ke Streamlit • Interaktif dan siap pakai.")
 
 # -------------------- KPI --------------------
 c1, c2, c3, c4 = st.columns(4)
@@ -225,3 +224,4 @@ with st.expander("ℹ️ Cara Pakai"):
 - Tab **Tren Top-N** otomatis memilih N jenis izin teratas.  
 - Jika tidak unggah CSV, aplikasi pakai contoh data.
 """)
+
