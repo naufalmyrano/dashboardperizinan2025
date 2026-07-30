@@ -61,11 +61,59 @@ def kpi_card(title, value, help_txt=None):
     st.metric(label=title, value=value, help=help_txt)
 
 # -------------------- Sidebar --------------------
+# -------------------- Load Data --------------------
+@st.cache_data(show_spinner=False)
+def load_data() -> pd.DataFrame:
+    default_path = "Rekap Izin final.xlsx"
+
+    if not os.path.exists(default_path):
+        st.error(f"File '{default_path}' tidak ditemukan.")
+        st.stop()
+
+    df = pd.read_excel(default_path)
+
+    # Normalisasi nama kolom
+    df.columns = df.columns.astype(str).str.strip().str.upper()
+
+    # Validasi kolom wajib
+    missing = [c for c in REQUIRED_COLS if c not in df.columns]
+    if missing:
+        st.error(f"Kolom wajib belum lengkap: {missing}. Harus ada {REQUIRED_COLS}.")
+        st.stop()
+
+    # Bersihkan data
+    df = df[df["BULAN"].astype(str).str.upper() != "JUMLAH"].copy()
+
+    df["BULAN"] = (
+        df["BULAN"]
+        .astype(str)
+        .str.upper()
+        .str.strip()
+    )
+
+    df["BULAN"] = pd.Categorical(
+        df["BULAN"],
+        categories=MONTH_ORDER_ID,
+        ordered=True
+    )
+
+    df = df.sort_values("BULAN")
+
+    df["JUMLAH"] = (
+        pd.to_numeric(df["JUMLAH"], errors="coerce")
+        .fillna(0)
+        .astype(int)
+    )
+
+    return df
+
+
+# -------------------- Sidebar --------------------
 with st.sidebar:
     st.header("⚙️ Pengaturan")
-    uploaded = st.file_uploader("Unggah data Excel/CSV (opsional)", type=["csv", "xlsx"], key="file_uploader")
 
-df = load_data(uploaded)
+# Load data
+df = load_data()
 
 with st.sidebar:
     st.markdown("### 🔎 Filter")
