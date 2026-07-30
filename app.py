@@ -16,7 +16,7 @@ except ModuleNotFoundError:
 
 # -------------------- Page Config --------------------
 st.set_page_config(
-    page_title="Dashboard Izin (Multi-Kategori) • Streamlit",
+    page_title="Dashboard Perizinan DPMPTSP Sleman • Streamlit",
     page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded",
