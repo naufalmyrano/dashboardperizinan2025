@@ -141,7 +141,7 @@ with st.sidebar:
     st.caption("Tip: atur Top-N untuk fokus pada jenis izin terbanyak.")
 
 # -------------------- Main Page --------------------
-st.title("📊 Dashboard Izin Multi-Kategori")
+st.title("📊 Dashboard Perizinan DPMPTSP Sleman")
 # Urutan custom kategori
 kategori_order = [
     "JUMLAH IZIN TERBIT",
