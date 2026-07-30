@@ -361,11 +361,4 @@ with tab6:
     csv = dff.to_csv(index=False).encode("utf-8")
     st.download_button("⬇️ Unduh CSV (filter saat ini)", data=csv, file_name="data_filter.csv", mime="text/csv")
 
-st.divider()
-with st.expander("ℹ️ Cara Pakai"):
-    st.markdown("""
-- Unggah file **Excel/CSV** dengan kolom: `SEKTOR, JENIS IZIN, KATEGORI, BULAN, JUMLAH`.
-- Pilih kategori di halaman utama, filter lain di sidebar.
-- Tab **Komposisi Bulan** kini hanya menampilkan Top-5 Jenis Izin.
-- Tab **Perbandingan Kategori** tetap menampilkan semua kategori.
-""")
+
